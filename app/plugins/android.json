@@ -1,0 +1,34 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-actionsheet": {
+            "PACKAGE_NAME": "com.turtledesigns.supermarkets"
+        },
+        "cordova-plugin-device-motion": {
+            "PACKAGE_NAME": "com.turtledesigns.supermarkets"
+        },
+        "cordova-plugin-device-orientation": {
+            "PACKAGE_NAME": "com.turtledesigns.supermarkets"
+        },
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "com.turtledesigns.supermarkets"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.turtledesigns.supermarkets"
+        },
+        "uk.co.workingedge.phonegap.plugin.launchnavigator": {
+            "PACKAGE_NAME": "com.turtledesigns.supermarkets"
+        }
+    },
+    "dependent_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "com.turtledesigns.supermarkets"
+        }
+    }
+}

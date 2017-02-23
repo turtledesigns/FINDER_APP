@@ -1,0 +1,66 @@
+<html ng-app="ngapp">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, target-densitydpi=medium-dpi, user-scalable=0" />
+    <script type="text/javascript" src="js/vendor/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="js/vendor/jquery-ui-1.10.4.custom.min.js"></script>
+    <script type="text/javascript" src="js/vendor/angular.js"></script>
+    <script type="text/javascript" src="js/vendor/angular-sanitize.js"></script>
+    <script type="text/javascript" src="js/ng-cordova.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuGTxBmoOdcx27bcYhE3igTgxPh50Uj7Y" async defer></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+	<link rel="stylesheet" href="css/main.css">
+</head>
+
+<body ng-controller="FinderApp">
+    <header style="background-color:{{moduleSettings.color}};">
+        <img id="logo" ng-src="modules/{{settings.module}}/icon.png" /><div id="appTitle" ng-bind-html="moduleSettings.name | split_to_breaks"></div>
+        <img id="reload" src="img/refresh.png" onclick="location.reload()" />
+    </header>
+    <div id="splash_screen">
+        <div id="splash_wrapper" style="background-color:{{moduleSettings.color}};">
+            <img id="spash_logo" ng-src="modules/{{settings.module}}/icon.png" />
+            <div id="splash_title" ng-bind-html="moduleSettings.name | split_to_breaks"></div>
+        </div>
+    </div>
+    <div id="app_container">
+        <div id="map"></div>
+        <div id="location_wrapper">
+            <div class="location_list" id="{{places.markerID}}" on-finish-render="ngRepeatFinished" ng-repeat="places in results" ng-click="focusOnMarker(places.markerID)">
+                <!--            <div class="location_list" on-finish-render="ngRepeatFinished" ng-repeat="places in results | orderBy:'driving.distance.value'">-->
+                <div class="location_section">
+                    <div class="location_name" ng-if="moduleSettings.display.name"><img ng-src="{{places.markerImg}}" ng-show="places.markerImg"><span>{{places.name}}</span></div>
+                    <!--<div class="location_website" ng-if="places.placeidinfo.website"><a href="{{places.placeidinfo.website}}" target="_blank"> [Visit]</a></div>-->
+                    <div class="location_rating" ng-if="places.rating && moduleSettings.display.rating">{{(places.rating).toFixed(1)}} <img src="img/stars.png" style="background:linear-gradient(to right, #E7711B 0%, #E7711B {{(places.rating/5)*100}}%, #999 0%);" /></div>
+                    <div class="location_opening_times" ng-if="places.placeidinfo.opening_hours.weekday_text[dayInt] && moduleSettings.display.time" ng-class="(places.opening_hours.open_now) ? 'open-now' : 'closed'">
+                        {{places.placeidinfo.opening_hours.weekday_text[dayInt]|removeday}}
+                    </div>
+                    <div class="location_address" ng-if="places.vicinity && moduleSettings.display.address">{{places.vicinity}}</div>
+
+                    <div class="location_number" ng-if="places.placeidinfo.formatted_phone_number && moduleSettings.display.tel"><img src="img/phone_grey.png"><a href="tel:{{places.placeidinfo.formatted_phone_number}}">{{places.placeidinfo.formatted_phone_number}}</a></div>
+
+
+                    <div class="location_distance" ng-if="moduleSettings.display.distance"><img src="img/road_grey.png"> {{places.driving.distance.text|timeconversion}} <img src="img/drive_grey.png"> {{places.driving.duration_in_traffic.text|timeconversion}} <img src="img/walk_grey.png"> {{places.walking.duration.text|timeconversion}}</div>
+                </div>
+                <div ng-click="navigateTo(places.geometry.location.lat,places.geometry.location.lng)" class="location_navigate">
+                    <svg fill="{{moduleSettings.color}}" id="Layer_1" style="enable-background:new 0 0 512 512;" version="1.1" viewbox="0 0 512 512" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <g>
+                            <path d="M256,64.5c51.1,0,99.2,19.9,135.4,56.1s56.1,84.2,56.1,135.4s-19.9,99.2-56.1,135.4s-84.2,56.1-135.4,56.1   s-99.2-19.9-135.4-56.1C84.5,355.2,64.5,307.1,64.5,256s19.9-99.2,56.1-135.4C156.8,84.5,204.9,64.5,256,64.5 M256,48   C141.1,48,48,141.1,48,256c0,114.9,93.1,208,208,208c114.9,0,208-93.1,208-208C464,141.1,370.9,48,256,48L256,48z" />
+                            <polygon points="352,160 128.3,256 256,256 256,384  " />
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <footer></footer>
+</body>
+
+</html>
