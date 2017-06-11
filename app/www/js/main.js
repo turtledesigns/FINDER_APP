@@ -270,6 +270,10 @@ function main($scope, $http, $cordovaLaunchNavigator) {
                                               }, 20, function() {
                                                     // do nothing as animation has reset
                                               });
+
+											  if (cordova.platformId == 'android') {
+												  StatusBar.backgroundColorByHexString("#000000");
+											  }
                                               });
                                         },1000)
                                     }

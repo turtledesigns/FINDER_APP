@@ -12,6 +12,8 @@
 	<access origin="*://*.gstatic.com/*" subdomains="true" />
 	<access origin="*://*.google.com/*" subdomains="true" />
 	<access origin="*://*.googleusercontent.com/*" subdomains="true" />
+	<preference name="StatusBarOverlaysWebView" value="false" />
+	<preference name="StatusBarBackgroundColor" value="#000000" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
