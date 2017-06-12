@@ -127,7 +127,7 @@ function main($scope, $http, $cordovaLaunchNavigator) {
             $scope.settings = res.data;
             $http.get('modules/' + $scope.settings.module + '/module.json').then(function (res) {
                 $scope.moduleSettings = res.data;
-                var searchUrl = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + latitude + ',' + longitude + '&rankby=distance&' + (($scope.moduleSettings.types.length > 1) ? 'types' : 'type') + '=' + $scope.moduleSettings.types.join('|') + (($scope.moduleSettings.keywords.length > 0) ? '&keyword="' + $scope.moduleSettings.keywords.join('|') + '"' : '') + '&key=' + $scope.settings.webServiceAPI;
+				var searchUrl = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + $scope.myLocation.lat + ',' + $scope.myLocation.long + '&rankby=distance&' + (($scope.moduleSettings.types.length > 1) ? 'types' : 'type') + '=' + $scope.moduleSettings.types.join('|') + (($scope.moduleSettings.keywords.length > 0) ? '&keyword="' + $scope.moduleSettings.keywords.join('|') + '"' : '') + '&key=' + $scope.settings.webServiceAPI;
 
 
                 $http.get(searchUrl).then(function (res) {
