@@ -151,7 +151,7 @@ gulp.task('version',function(){
 
 // copy assets
 gulp.task('moveBuildToCorrectFolder', function (){
-	return gulp.src('app/platforms/android/build/outputs/apk/**.apk')
+	return gulp.src('app/platforms/android/build/outputs/apk/android-release.apk')
 		.pipe(rename(argv.appname + '.apk'))
 		.pipe($.if((argv.testBuild == true), gulp.dest('release/TESTBUILD_' + pkg.version)))
 		.pipe($.if((!argv.testBuild), gulp.dest('release/BUILD_' + pkg.version)))
