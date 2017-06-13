@@ -154,7 +154,7 @@ header #reload {
     transform: translateY(-50%);
     position: absolute;
     display: inline-block;
-    width: 100%;
+    width: 90%;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
